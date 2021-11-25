@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="sampmunit-test-suite.xml" />
+	<munit:test name="sampmunit-test-suite-sampmunitFlowTest" doc:id="68237a58-59e3-4546-b0fa-13bf76642978" description="Test">
+		<munit:execution >
+			<munit:set-event doc:name="Set Event" doc:id="ca3f0869-bc1c-4eff-82a6-74335f847c52" >
+				<munit:attributes value='#[{queryParams: {fn:"mouni",sn:"alanki"}}]' />
+			</munit:set-event>
+			<flow-ref doc:name="Flow-ref to sampmunitFlow" doc:id="29f012c4-165c-4902-abc5-5acae7293a11" name="sampmunitFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert doc:name="Assert expression" doc:id="ce7f64f6-5973-4374-9c49-613b948498ec" >
+				<munit-tools:that ><![CDATA[#[import * from dw::test::Asserts 
+ ---
+payload must equalTo({ "Message": "Hi mounialanki"})]]]></munit-tools:that>
+			</munit-tools:assert>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
